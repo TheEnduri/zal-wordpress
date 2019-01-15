@@ -1,0 +1,61 @@
+---
+- hosts: load_balancer_nginx
+  become: yes
+  vars:
+    EPEL_rpm: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+  tasks:
+    - name: "Install EPEL"
+      yum:
+        name: "{{EPEL_rpm}}"
+        state: present
+    - name: "Install nginx"
+      yum:
+        name: nginx
+        state: present    
+    - name: "Copy cfg into dest"
+      template:
+        src: templates/load-balancer.conf
+        dest: /etc/nginx/conf.d/load-balancer.conf
+    - name: "Start nginx"
+      service:
+        name: "nginx"
+        state: restarted
+  
+- hosts: app_test1
+  become: yes 
+  tasks:
+    - name: "Install apache httpd"
+      yum:
+        name: httpd
+        state: latest
+    - name: "Copy index into dest"
+      template:
+        src: templates/index1.html
+        dest: /var/www/html/index.html
+    - name: "Start apache"
+      service:
+        name: "httpd"
+        state: restarted
+
+- hosts: app_test2
+  become: yes 
+  tasks:
+    - name: "Install apache httpd"
+      yum:
+        name: httpd
+        state: latest
+    - name: "Copy index into dest"
+      template:
+        src: templates/index2.html
+        dest: /var/www/html/index.html
+    - name: "Start apache"
+      service:
+        name: "httpd"
+        state: restarted  
+    
+  
+  
+  # - name: install jre runtime env not jdk
+  # - name: copy java jar
+   # test if it is working
+   #- copy systemd/app.service /etc/systemd/system/car_rental.service

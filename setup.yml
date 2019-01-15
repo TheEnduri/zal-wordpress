@@ -1,0 +1,8 @@
+---
+- hosts: application_nodes
+  become: yes
+  tasks:
+    - name: install jre runtime not jdk
+    - name: copy java app jar
+    # test if it is working
+- copy systemd/app.service /etc/systemd/system/car_rental.

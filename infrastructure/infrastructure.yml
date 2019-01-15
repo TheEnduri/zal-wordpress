@@ -1,0 +1,38 @@
+---
+- hosts: load_balancer_nginx
+  become: yes
+  tags: [nginx]
+  roles:
+    - nginx
+    - telegraf
+    
+- hosts: app_test_nodes
+  become: yes
+  tags: [app]
+  roles:
+    - apache
+    - telegraf
+    
+- hosts: db_server
+  become: yes
+  tags: [db]
+  roles:
+    - database
+    - telegraf
+    
+- hosts: stats_server
+  become: yes
+  tags: [stats]
+  vars:
+    metrics_db_name: "metrics"
+    metrics_db_password: "metrics"
+    metrics_db_user: "metrics"
+    datasource_name: "my-influx"
+    grafana_http_port: 3000
+    telegraf_cfg_path: "telegraf_default.conf"
+  roles:
+    - influxdb
+    - grafana
+  tasks:
+    - include_tasks: tasks/configure-grafana.yml
+    
