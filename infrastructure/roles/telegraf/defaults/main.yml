@@ -1,6 +1,6 @@
 ---
 rpm_telegraf: https://dl.influxdata.com/telegraf/releases/telegraf-1.6.3-1.x86_64.rpm
-telegraf_influx_url: http://3.120.108.82:8086
+telegraf_influx_url: http://172.31.24.46:8086
 telegraf_influx_db_name: "metrics"
 telegraf_influx_db_user: "metrics"
 telegraf_influx_db_password: "metrics"

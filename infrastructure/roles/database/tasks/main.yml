@@ -1,4 +1,9 @@
 ---
+- name: "Adding a repository"
+  yum:
+    name: "{{repo_mysql}}"
+    state: present
+    
 - name: "Install all packages"
   yum:
     name: "{{packages}}"

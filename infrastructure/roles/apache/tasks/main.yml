@@ -1,14 +1,14 @@
 - name: "Install apache httpd"
-      yum:
-        name: httpd
-        state: latest
+  yum:
+    name: httpd
+    state: latest
         
 - name: "Copy index into dest"
-      template:
-        src: index1.html
-        dest: /var/www/html/index.html
+  template:
+    src: index1.html
+    dest: /var/www/html/index.html
         
 - name: "Start apache"
-      service:
-        name: "httpd"
-        state: restarted
+  service:
+    name: "httpd"
+    state: restarted
