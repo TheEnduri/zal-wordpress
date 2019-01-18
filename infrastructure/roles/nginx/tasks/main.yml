@@ -1,7 +1,12 @@
 ---
-  - name: "Install EPEL"
+  - name: "Install EPEL from RPM"
     yum:
-      name: epel-release
+      name: "{{epel_repo}}"
+      state: present
+      
+  - name: "Import EPEL GPG key"
+    rpm_key:
+      key: "{{epel_repo_gpg_key_url}}"
       state: present
      
   - name: "Install nginx"
