@@ -1,0 +1,30 @@
+- name: "download wordpress"    
+  get_url:
+    url: "{{wordpress_tar}}"
+    dest: ~/wordpress.tar.gz
+        
+- name: "unpack wordpress file"    
+  unarchive:
+    src: ~/wordpress.tar.gz
+    dest: /var/www/
+    remote_src: yes
+        
+- name: "Create a new database with name adsk_wordpress"
+  mysql_db:
+    name: "{{database}}"
+    state: present  
+        
+- name: "configure apache vihost" 
+  copy:
+    src: templates/vhost.conf
+    dest: /etc/httpd/conf.d/blog.conf
+        
+- name: "Start service httpd, if not started"
+  service:
+    name: httpd
+    state: restarted
+        
+- name: "copy wordpress" 
+  template:
+    src: templates/wp-config.php
+    dest: "{{blog_path}}/wp-config.php"

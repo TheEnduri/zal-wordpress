@@ -1,9 +1,8 @@
 ---
-  repo_mysql: http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
   packages:
       - httpd
-      - mysql
-      - mysql-server
+      - mariadb
+      - mariadb-server
       - php
       - php-mysql
       - MySQL-python

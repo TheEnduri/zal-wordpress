@@ -10,7 +10,7 @@
   become: yes
   tags: [app]
   roles:
-    - apache
+    - wordpress
     - telegraf
     
 - hosts: db_server

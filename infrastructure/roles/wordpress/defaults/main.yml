@@ -1,0 +1,5 @@
+---
+    blog_path: /var/www/wordpress
+    database: adsk_wordpress
+    database_user: root
+    wordpress_tar: https://pl.wordpress.org/wordpress-4.9.8-pl_PL.tar.gz
